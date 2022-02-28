@@ -4,7 +4,10 @@ const port = 8000;
 
 const app = express();
 
+const db = require('./config/mongoose');
+
 const expressLayouts = require('express-ejs-layouts');
+const { default: mongoose } = require('mongoose');
 
 //Telling my app to static files from a particular directory
 app.use(express.static('./assets'));
@@ -31,9 +34,6 @@ app.listen(port , function(err){
 
     console.log(`Connected successfully on port ${port}`);
 })
-
-
-
 
 
 
