@@ -4,7 +4,9 @@
 
     <title><%= title %> </title>
     
-    <link rel='stylesheet' type='text/css' media='screen' href='./css/layout.css'>
+    <link rel='stylesheet' type='text/css' href='/css/layout.css'>
+
+    <%- style %>
    
 </head>
 <body>
@@ -16,9 +18,11 @@
     <%- body %>
 
     <!-- Partials -->
-    <%- include('_footer.ejs'); %>
+    <%- include('_footer'); %>
     
-    <script src='main.js'></script>
+    <%- script %>
+
+    <!-- <script src='.js'></script> -->
 
 </body>
 </html>
@@ -28,9 +32,10 @@
     * layout.ejs is Layout To => <%- body %>
     * Bascially layout.ejs is wrapper to the {body}
     * We did not have information about what we will be the content inside {body}
+    * So whenever users.ejs is opened then it takes to the layout.ejs and here wherever body has been written there all things is being replaced by users.ejs content
 -->
 
 
 <!-- 
-    * 
+    * partials is nothing but #define property (for understanding purpose)
 -->

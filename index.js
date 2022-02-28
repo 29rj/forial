@@ -12,9 +12,13 @@ app.use(express.static('./assets'));
 //Telling our app/website to use the expressLayouts
 app.use(expressLayouts);
 
-//Re-routing to toutes folder
-app.use('/',require('./routes'));
+//It is used when we need to style and scripts particular sub files in layout 
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
+
+//Re-routing to routes folder
+app.use('/',require('./routes'));
 
 //setup the view engine
 app.set('view engine','ejs');
