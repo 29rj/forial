@@ -4,6 +4,15 @@ const port = 8000;
 
 const app = express();
 
+const expressLayouts = require('express-ejs-layouts');
+
+//Telling my app to static files from a particular directory
+app.use(express.static('./assets'));
+
+//Telling our app/website to use the expressLayouts
+app.use(expressLayouts);
+
+//Re-routing to toutes folder
 app.use('/',require('./routes'));
 
 
