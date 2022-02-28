@@ -7,7 +7,12 @@ const app = express();
 const db = require('./config/mongoose');
 
 const expressLayouts = require('express-ejs-layouts');
-const { default: mongoose } = require('mongoose');
+
+const cookieParser = require('cookie-parser');
+
+app.use(express.urlencoded());
+
+app.use(cookieParser());
 
 //Telling my app to static files from a particular directory
 app.use(express.static('./assets'));
