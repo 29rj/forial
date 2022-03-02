@@ -10,7 +10,17 @@ const expressLayouts = require('express-ejs-layouts');
 
 const cookieParser = require('cookie-parser');
 
+//Used for session creation using passport
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-stragety');
+
+const MongoStore = require('connect-mongo');
+const { default: mongoose } = require('mongoose');
+
 app.use(express.urlencoded());
+
+
 
 app.use(cookieParser());
 
@@ -25,12 +35,35 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 
+//setup the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
+
+//telling our app to use session we have created in config as "passport-local-stragety"
+app.use(session({
+    name:'forial',
+
+    //TODO change before production
+    secret:"kuchbhi", // using ecret key to encypt our session_id
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000*68*100) //time for our cookie to remain in existance
+    },
+    store:MongoStore.create({
+        mongoUrl: 'mongodb://localhost/db',
+        autoRemove:'disabled'
+    },function(err){
+        console.log(err || 'connect monogodb is ok');
+    })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Re-routing to routes folder
 app.use('/',require('./routes'));
 
-//setup the view engine
-app.set('view engine','ejs');
-app.set('views','./views')
 
 app.listen(port , function(err){
     if(err){
@@ -43,5 +76,7 @@ app.listen(port , function(err){
 
 
 /* 
+sudo systemctl status mongod
+sudo systemctl start mongod
 1. Install express---> npm  install express
 */
