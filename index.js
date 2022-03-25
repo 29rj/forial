@@ -1,6 +1,6 @@
 const express = require('express');
 
-const port = 8000;
+const port = 5678;
 
 const app = express();
 
@@ -10,6 +10,7 @@ const expressLayouts = require('express-ejs-layouts');
 
 const cookieParser = require('cookie-parser');
 
+//-------------------- for cookie --------------------------
 //Used for session creation using passport
 const session = require('express-session');
 const passport = require('passport');
@@ -18,9 +19,19 @@ const passportLocal = require('./config/passport-local-stragety');
 const MongoStore = require('connect-mongo');
 const { default: mongoose } = require('mongoose');
 
+const sassMiddleware = require('node-sass-middleware')
+
+//--------------------for cookie----------------------------
+
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:true,
+    outputStyle:'expanded',
+    prefix:'/css'
+}))
+
 app.use(express.urlencoded());
-
-
 
 app.use(cookieParser());
 
@@ -64,15 +75,12 @@ app.use(passport.session());
 //Re-routing to routes folder
 app.use('/',require('./routes'));
 
-
 app.listen(port , function(err){
     if(err){
         console.log(`Error in connecting: ${err}`);
     }
-
     console.log(`Connected successfully on port ${port}`);
 })
-
 
 
 /* 

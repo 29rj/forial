@@ -1,0 +1,16 @@
+#footer-div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  background-color: #b1aaaa;
+}
+
+#footer-div div {
+  margin-left: 15px;
+}
+
+#footer-div div span {
+  margin-left: 15px;
+}
