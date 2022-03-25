@@ -7,6 +7,7 @@ router.get('/',homeControllers.home);//callback function is homeControllers.home
 
 //Re-routing to another routes
 router.use('/users',require('./users'));
+router.use('/posts',require('./posts'));
 
 console.log("Router Loaded!!");
 

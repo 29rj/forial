@@ -1,8 +1,13 @@
+const Post = require('../models/post');
+
 module.exports.home = function(req,res){
-    // return res.end("<h1>Controllers Home !!!</h1>");\
-    // res.cookie('user_id',25);
-    console.log(req.cookies);
-    return res.render('home',{
-        title:"Home",
-    });
+    // console.log(req.cookies);
+    
+    Post.find({}).populate('user').exec(function(err,posts){
+        if(err){console.log('Not Found Any PostS')};
+        return res.render('home',{
+            title:"Home",
+            posts:posts
+        });
+    })
 }
